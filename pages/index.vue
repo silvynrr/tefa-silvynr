@@ -1,142 +1,78 @@
 <template>
-    <div div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-              <form @submit.prevent="kirimData">
-              <h2 class="text-center my-4">ISI DATA KUNJUNGAN</h2>
-                <div class="mb-3">
-                  <input v-model="form.nama" type="text" class="form-control form-control-lg rounded-5" placeholder="Nama...">
-                </div>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row mx-1 py-5">
+        <div class="col-lg-6 col mb-3">
+          <nuxt-link to="/pengunjung/riwayat" class="text-black text-decoration-none">
+            <div class="card bg-pengunjung rounded-5">
+              <div class="card-body pt-5">
+                <h2 class="text-center text-white mt-5">RIWAYAT KUNJUNGAN</h2>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
 
-                <div class="mb-3">
-                  <select v-model="form.keanggotaan" @change="resetKelas"  class="form-control form-control-lg form-select rounded-5">
-                    <option value="">Keanggotaan...</option>
-                    <option v-for="(member, i) in members" :key="i" :value="member.id">{{ member.nama }}</option>
-                  </select>
-                  </div>
-
-                <div v-if="form.keanggotaan == '1'" class="mb-3">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <select v-model="form.tingkat" class="form-control form-control-lg form-select rounded-5 mb-2">
-                        <option value="">Tingkat...</option>
-                        <option value="X">X</option>
-                        <option value="XI">XI</option>
-                        <option value="XII">XII</option>
-                    </select>
-                    </div>
-
-                    <div class="col-md-4">
-                    <select v-model="form.jurusan" class="form-control form-control-lg form-select rounded-5 mb-2">
-                      <option value="">Jurusan...</option>
-                      <option value="PPLG">PPLG</option>
-                      <option value="TJKT">TJKT</option>
-                      <option value="TSM">TSM</option>
-                      <option value="DKV">DKV</option>
-                      <option value="TOI">TOI</option>
-                      </select>
-                    </div>
-
-                    <div class="col-md-4">
-                      <select v-model="form.kelas" class="form-control form-control-lg form-select rounded-5 mb-2">
-                      <option value="">Kelas...</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mb-3">
-                  <select v-model="form.keperluan" class="form-control form-control-lg form-select rounded-5">
-                    <option value="">Keperluan...</option>
-                    <option v-for="(item, i) in objectives" :key="i" :value="item.id">{{ item.nama }}</option>
-                  </select>
-                  </div>
-                  <button type="submit" class="btn btn-light rounded-5 px-5">Kirim</button>
-            </form>
+        <div class="col-lg-6 col">
+          <nuxt-link to="/buku" class="text-black text-decoration-none">
+            <div class="card bg-buku rounded-5">
+              <div class="card-body pt-5">
+                <h2 class="text-center text-white mt-5">CARI BUKU</h2>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2>Statistik</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-6">
+          <div class="card pengunjung rounded-5">
+            <div class="card-body">
+              <h2 class="text-center mt-5">3 Pengunjung</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-6">
+          <div class="card buku rounded-5">
+            <div class="card-body">
+              <h2 class="text-center mt-5">100 Buku</h2>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
-
-<script setup>
-const supabase = useSupabaseClient()
-
-const members = ref([])
-const objectives = ref([])
-const form = ref({
-  nama: "",
-  keanggotaan: "",
-  tingkat: "",
-  jurusan: "",
-  kelas: "",
-  keperluan: ""
-})
-const kirimData = async () => {
-  const { error } = await supabase.from('pengunjung').insert([form.value])
-  if(error) throw error
-  else navigateTo('/pengunjung/riwayat')
-}
-const getKeanggotaan = async () => {
-  const { data, error } = await supabase.from('keanggotaan').select('*')
-  if(data) members.value = data 
-}
-const getKeperluan = async () => {
-  const { data, error } = await supabase.from('keperluan').select('*')
-  if(data) objectives.value = data 
-}
-const resetKelas = e => {
-  if(e.target.value === '2' || '3' || '4'){
-  form.value.tingkat = ''
-  form.value.jurusan = ''
-  form.value.kelas = ''
-  }
-}
-onMounted(() => {
-  getKeanggotaan()
-  getKeperluan()
-})
-</script>
-
 <style scoped>
 .content{
-  background-color: #6AB187;
-  height: 100vh;
+  background-color: #ffffff;
+  /* height: 100vh; */
   width: 100%;
 }
-.container-fluid {
-  width: 100%;
-  height: 500px;
-  padding-top: 150px;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
+.card {
+  opacity: 85%;
+  align-items: center;
+  height:250px;
 }
-.btn{
-  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
-  background-color: rgb(255, 255, 255);
-  color: black;
-  width: 150px;
-  height: 50px;
+.card.bg-pengunjung {
+  background-image: url('@/assets/img/bg-home-kunjungan.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
-form {
-  background-color: #20948B;
-  padding: 5rem;
-  border-radius: 20px;
-  font-family: '';
-  color: white;
-  margin-top: 200px;
-} 
-
-::placeholder{
-  color: rgba(0, 0, 0, 0.788);
-  font-size: large;
+.card.bg-buku {
+  background: url('@/assets/img/bg-home-cari-buku.jpg');
+  background-size: cover;
+}
+.card.pengunjung {
+  /* warna card statistik pengunjung */
+  background-color: #ffff00;
+}
+.card.buku {
+  /* warna card statistik buku */
+  background-color: #6da2ac;
 }
 </style>

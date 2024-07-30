@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="row float-end">
-        <nuxt-link to="/pengunjung/menu" class="btn btn-dark btn-lg rounded-5 px-5">menu</nuxt-link>
+        <nuxt-link to="/pengunjung" class="btn btn-dark btn-lg rounded-5 px-5">menu</nuxt-link>
     </div>
   </div>
 </template>
@@ -50,20 +50,25 @@ onMounted(() => {
 
 <style scoped>
 .container-fluid {
-  background-image: url('@/assets/img/bg-home-kunjungan.jpg');
+  background: #235C4E;
   background-size: cover;
   height: 100vh;
   width: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color:rgb(255, 255, 255);
-  color: white;
+  color:rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   opacity: 70%;
 }
 .btn{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: rgb(255, 255, 255);
-  color: black;
+  background-color: rgb(243, 243, 243);
+  color: rgb(0, 0, 0);
   width: 150px;
   height: 50px;
+}
+
+.table td{
+  background: #235C4E;
+  color: black;
 }
 </style>

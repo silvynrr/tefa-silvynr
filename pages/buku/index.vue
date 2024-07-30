@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-lg-12">
           
-            <h2 class="text-center my-4 text-white">RAK BUKU</h2>
+            <h2 class="text-center my-4 text-white">CARI BUKU</h2>
             <form @submit.prevent="getBooks" class="col mb-3">
               <div class="input-group flex-nowrap rounded">
                 <input v-model="keyword" type="search" class="form-control from-control-lg rounded-5" placeholder="Cari..." aria-label="Search" @input="getbooks" />
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="row d-flex justify-content-end">
-                <nuxt-link to="/pengunjung/menu" class="col-1 btn btn-dark btn-lg rounded-5 px-5">menu</nuxt-link>        
+                <nuxt-link to="/pengunjung" class="col-1 btn btn-dark btn-lg rounded-5 px-5">menu</nuxt-link>        
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@ const books = ref([])
 
 const getbooks = async () => {
   const { data ,error } = await supabase
-  .from('buku')
+  .from('Buku')
   .select(`*, kategori(*)`)
   .ilike("judul", `%${keyword.value}%`)
   .order('id')
@@ -52,7 +52,7 @@ onMounted(() =>{
 </script>
 <style scoped>
 .content{
-  background-image: url('@/assets/img/bg-home-cari-buku.jpg');
+  background-color: #235C4E;
   background-size: cover;
   background-repeat: no-repeat;
   /* font-family: "Jockey One"; */
@@ -78,7 +78,7 @@ onMounted(() =>{
 }
 .btn{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(248, 246, 246);
   color: black;
   width: 150px;
   height: 50px;
