@@ -16,7 +16,7 @@
 
 <style scoped>
 .bg-primary {
-  background-color: #0C6DFF!important;
+  background-color: #20948B!important;
   font-family:cursive;
   width: 100%;
   left: 0;
